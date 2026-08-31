@@ -1,7 +1,7 @@
 version: 2026.232.0520
 charly-infrastructure:
     candy:
-        version: 2026.243.0100
+        version: 2026.243.0909
         description: |-
             Metadata concept candy owning the charly-infrastructure skills whose names have no namesake candy (infra services). Owns its family's `skill:` kind entities (sibling nodes in this file) — the
             the plugins→candies migration; candy/plugin-marketplace regenerates the marketplace
@@ -56,7 +56,7 @@ dbus-layer-skill:
             # charly.yml -- now included in all images with supervisord
             my-image:
               candy:
-                - '@github.com/opencharly/pod-dbus:v2026.235.2115'
+                - '@github.com/opencharly/pod-dbus:vTAG'
             ```
             
             ## The `dbus:` check verb
@@ -177,9 +177,9 @@ keepassxc-keyring-skill:
             local:
               charly-cachyos:
                 candy:
-                  - '@github.com/opencharly/layer-direnv:v2026.242.1147'
-                  - '@github.com/opencharly/layer-gnupg:v2026.239.1615'
-                  - '@github.com/opencharly/layer-keepassxc:v2026.239.1624'
+                  - '@github.com/opencharly/layer-direnv:vTAG'
+                  - '@github.com/opencharly/layer-gnupg:vTAG'
+                  - '@github.com/opencharly/layer-keepassxc:vTAG'
                   - keepassxc-keyring     # this layer
                   ...
             ```
@@ -276,7 +276,7 @@ tmux-layer-skill:
               candy:
                 base: fedora
                 candy:
-                  - '@github.com/opencharly/layer-tmux:v2026.235.2057'
+                  - '@github.com/opencharly/layer-tmux:vTAG'
             ```
             
             ## Used In Boxes
