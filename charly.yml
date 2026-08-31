@@ -56,7 +56,7 @@ dbus-layer-skill:
             # charly.yml -- now included in all images with supervisord
             my-image:
               candy:
-                - '@github.com/opencharly/pod-dbus:vTAG'
+                - '@github.com/opencharly/pod-dbus'
             ```
             
             ## The `dbus:` check verb
@@ -177,9 +177,9 @@ keepassxc-keyring-skill:
             local:
               charly-cachyos:
                 candy:
-                  - '@github.com/opencharly/layer-direnv:vTAG'
-                  - '@github.com/opencharly/layer-gnupg:vTAG'
-                  - '@github.com/opencharly/layer-keepassxc:vTAG'
+                  - '@github.com/opencharly/layer-direnv'
+                  - '@github.com/opencharly/layer-gnupg'
+                  - '@github.com/opencharly/layer-keepassxc'
                   - keepassxc-keyring     # this layer
                   ...
             ```
@@ -276,7 +276,7 @@ tmux-layer-skill:
               candy:
                 base: fedora
                 candy:
-                  - '@github.com/opencharly/layer-tmux:vTAG'
+                  - '@github.com/opencharly/layer-tmux'
             ```
             
             ## Used In Boxes
