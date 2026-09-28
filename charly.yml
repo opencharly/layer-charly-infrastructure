@@ -1,7 +1,5 @@
-version: 2026.249.2125
 charly-infrastructure:
     candy:
-        version: 2026.243.0909
         description: |-
             Metadata concept candy owning the charly-infrastructure skills whose names have no namesake candy (infra services). Owns its family's `skill:` kind entities (sibling nodes in this file) — the
             the plugins→candies migration; candy/plugin-marketplace regenerates the marketplace
