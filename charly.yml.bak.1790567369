@@ -1,5 +1,7 @@
+version: 2026.249.2125
 charly-infrastructure:
     candy:
+        version: 2026.243.0909
         description: |-
             Metadata concept candy owning the charly-infrastructure skills whose names have no namesake candy (infra services). Owns its family's `skill:` kind entities (sibling nodes in this file) — the
             the plugins→candies migration; candy/plugin-marketplace regenerates the marketplace
@@ -14,6 +16,7 @@ charly-infrastructure:
               context:
                 - build
               command: "true"
+
 dbus-layer-skill:
     skill:
         name: dbus-layer
@@ -24,40 +27,40 @@ dbus-layer-skill:
             Use when working with D-Bus, desktop services, Wayland compositor dependencies, or the `dbus:` check verb.
         content: |
             # dbus -- D-Bus session bus service
-
+            
             ## Candy Properties
-
+            
             | Property | Value |
             |----------|-------|
             | Dependencies | `supervisord` |
             | Service | `dbus` (supervisord, priority 2) |
             | Install files | `task:` |
-
+            
             ## Environment Variables
-
+            
             | Variable | Value |
             |----------|-------|
             | `DBUS_SESSION_BUS_ADDRESS` | `unix:path=/tmp/dbus-session` |
-
+            
             ## Packages
-
+            
             - `dbus-daemon` (RPM)
-
+            
             ## Cross-distro coverage
-
+            
             RPM: `dbus-daemon` (Fedora) · PAC: `dbus` (Arch) · DEB: `dbus` (Debian/Ubuntu). Full parity — same DBUS_SESSION_BUS_ADDRESS env, same supervisord fragment, identical behavior downstream.
-
+            
             ## Usage
-
+            
             ```yaml
             # charly.yml -- now included in all images with supervisord
             my-image:
               candy:
                 - '@github.com/opencharly/pod-dbus'
             ```
-
+            
             ## The `dbus:` check verb
-
+            
             The `dbus:` check verb drives this session bus from a candy/box plan. It is a
             declarative verb served out-of-process by `candy/plugin-dbus` (EXEC-based: the
             plugin drives `gdbus` from `glib2` over charly's `DeployExecutor` reverse channel);
@@ -65,54 +68,55 @@ dbus-layer-skill:
             `introspect`/`notify` steps with `context: [deploy]` and run them with
             `charly check live <image> --filter dbus`. See `/charly-check:dbus` for the full
             method catalog and YAML shape.
-
+            
             ### Notification Delivery Chain
-
+            
             `charly cmd` → `sendVenueNotification()` → `gdbus call ... org.freedesktop.Notifications.Notify` → swaync/mako → desktop popup
-
+            
             For notifications to work, the box needs:
             1. **`dbus` candy** — D-Bus session bus (this candy)
             2. **`swaync` candy** — notification daemon
             3. **`gdbus`** (from `glib2`) in the venue — the host drives it over the reverse channel
-
+            
             ## `charly status` Probe
-
+            
             The `dbus` probe checks:
             1. Whether `dbus-daemon` process is running
             2. Which notification daemon is active (swaync, mako, dunst)
-
+            
             Shows as `dbus:ok (notify:swaync)` in `charly status` detail view.
-
+            
             ## Used In Boxes
-
+            
             - Transitive dependency via `sway` in all desktop boxes
             - Now explicitly added to all boxes with supervisord (openclaw, jupyter, ollama, immich, etc.)
-
+            
             ## Related Candies
-
+            
             - `/charly-infrastructure:supervisord` -- process manager dependency
             - `/charly-selkies:sway` -- primary consumer (Sway depends on dbus)
             - `/charly-selkies:swaync` -- notification daemon (depends on dbus)
             - `/charly-selkies:libnotify` -- `notify-send` CLI tool (depends on dbus)
-
+            
             ## Related Commands
-
+            
             - `/charly-check:dbus` — the declarative `dbus:` check verb (notify, list, call, introspect), served out-of-process by `candy/plugin-dbus`
-
+            
             ## When to Use This Skill
-
+            
             Use when the user asks about:
-
+            
             - D-Bus session bus configuration
             - `DBUS_SESSION_BUS_ADDRESS` environment variable
             - the `dbus:` check verb (notify, call, list, introspect)
             - Desktop notifications in containers
             - Inter-process communication in containers
-
+            
             ## Related
-
+            
             - `/charly-image:layer` — candy authoring reference (`charly.yml` schema, task verbs, service declarations)
             - `/charly-check:check` — declarative testing (`check:` block, `charly check box`, `charly check live`)
+
 tmux-layer-skill:
     skill:
         name: tmux-layer
@@ -123,20 +127,20 @@ tmux-layer-skill:
             Use when working with the tmux candy.
         content: |
             # tmux -- Terminal multiplexer
-
+            
             ## Candy Properties
-
+            
             | Property | Value |
             |----------|-------|
             | Install files | `charly.yml` (packages only) |
             | Depends | none |
-
+            
             ## Packages
-
+            
             RPM: `tmux` · PAC: `tmux` · DEB: `tmux` — full cross-distro parity.
-
+            
             ## Usage
-
+            
             ```yaml
             # box charly.yml — a box composes the candy via an inline candy: list in its body
             my-box:
@@ -145,22 +149,22 @@ tmux-layer-skill:
                 candy:
                   - '@github.com/opencharly/layer-tmux'
             ```
-
+            
             ## Used In Boxes
-
+            
             - `openclaw-full` (via `openclaw-full` metalayer)
-
+            
             ## Related Skills
-
+            
             - `/charly-automation:tmux` — Typed persistent terminals, safe input, snapshots, transcripts, and agent runtimes
             - `/charly-hermes:hermes-full-layer`, `/charly-selkies:sway-desktop`, `/charly-selkies:selkies-desktop-layer` — metalayers that include this
             - `/charly-hermes:hermes`, `/charly-selkies:selkies-labwc`, `/charly-selkies:sway-browser-vnc` — primary consumers
             - `/charly-core:shell` — interactive container shell (often wrapped in tmux)
             - `/charly-image:layer` — candy authoring
             - `/charly-check:check` — declarative testing framework (this candy tests `/usr/bin/tmux -V`)
-
+            
             ## When to Use This Skill
-
+            
             Use when the user asks about:
             - Terminal multiplexer in containers
             - tmux setup
