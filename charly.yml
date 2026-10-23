@@ -1,33 +1,19 @@
 charly-infrastructure:
     candy:
         description: |-
-            Metadata concept candy owning the charly-infrastructure skills whose names have no namesake candy (infra services). Owns its family's `skill:` kind entities (sibling nodes in this file) — the
-            the plugins→candies migration; candy/plugin-marketplace regenerates the marketplace
-            corpus (the standalone opencharly/marketplace repo) from them.
+            Drained concept candy — kept only so this repo still validates as a project while
+            it awaits retirement (opencharly/opencharly#600). It owns NO `skill:` entity any
+            more: under AGENTS.md Part II #5 the 2 `infrastructure` family skills moved,
+            byte-identically, to the repositories that hold the code, plugin or config each one
+            documents — `layer-tmux`, `pod-dbus`.
+            Nothing is authored here now.
         plan:
-            - run: this documentation-only candy ships no install content (it carries the family's skill/hook/marketplace entities); validate-satisfying no-op
+            - run: this documentation-only candy ships no install content (it carried the family's skill entities); validate-satisfying no-op
               command: "true"
               context:
                 - build
-            - check: the infrastructure concept candy's skill entities are present and generated into the marketplace's infrastructure/skills
-              id: charly-infrastructure-present
+            - check: no-op — this drained candy declares no skill node; every infrastructure-family skill lives in the repo that holds the entity it documents
+              id: charly-infrastructure-drained
               context:
                 - build
               command: "true"
-
-dbus-layer-skill:
-    skill:
-        name: dbus-layer
-        family: infrastructure
-        owner: charly-infrastructure
-        description: |-
-            D-Bus session bus for inter-process communication inside containers.
-            Use when working with D-Bus, desktop services, Wayland compositor dependencies, or the `dbus:` check verb.
-tmux-layer-skill:
-    skill:
-        name: tmux-layer
-        family: infrastructure
-        owner: charly-infrastructure
-        description: |-
-            Terminal multiplexer.
-            Use when working with the tmux candy.
